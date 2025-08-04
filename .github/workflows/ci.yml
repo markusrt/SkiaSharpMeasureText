@@ -1,0 +1,72 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test-linux:
+    runs-on: ubuntu-latest
+    name: Build and Test on Linux
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+    
+    - name: Restore dependencies
+      run: dotnet restore
+      working-directory: ./TestMeasurements
+    
+    - name: Build
+      run: dotnet build --no-restore
+      working-directory: ./TestMeasurements
+    
+    - name: Test
+      run: dotnet test --no-build --verbosity normal --logger trx --results-directory TestResults
+      working-directory: ./TestMeasurements
+      continue-on-error: true
+    
+    - name: Upload test results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: test-results-linux
+        path: TestMeasurements/TestResults/*.trx
+
+  build-and-test-windows:
+    runs-on: windows-latest
+    name: Build and Test on Windows
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+    
+    - name: Restore dependencies
+      run: dotnet restore
+      working-directory: ./TestMeasurements
+    
+    - name: Build
+      run: dotnet build --no-restore
+      working-directory: ./TestMeasurements
+    
+    - name: Test
+      run: dotnet test --no-build --verbosity normal --logger trx --results-directory TestResults
+      working-directory: ./TestMeasurements
+      continue-on-error: true
+    
+    - name: Upload test results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: test-results-windows
+        path: TestMeasurements/TestResults/*.trx
