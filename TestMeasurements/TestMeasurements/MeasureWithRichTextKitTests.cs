@@ -18,8 +18,8 @@ namespace TestMeasurements
                 DefaultStyle = new Style { FontFamily = "Noto Sans", FontWeight = 700, FontSize = 10 },
             };
 
-            richString.MeasuredWidth.Should().Be(65.91797f);
             richString.MeasuredHeight.Should().Be(13.620000839233398f);
+            richString.MeasuredWidth.Should().Be(65.91797f);
         }
 
         [Test]
@@ -31,8 +31,8 @@ namespace TestMeasurements
                 DefaultStyle = new Style { FontFamily = "Noto Sans", FontSize = 10 },
             };
 
-            richString.MeasuredWidth.Should().Be(62.67578125f);
             richString.MeasuredHeight.Should().Be(13.620000839233398f);
+            richString.MeasuredWidth.Should().Be(62.67578125f);
         }
 
         [Test]
@@ -44,8 +44,8 @@ namespace TestMeasurements
                 DefaultStyle = new Style { FontFamily = "Roboto", FontWeight = 700, FontSize = 10 },
             };
 
-            richString.MeasuredWidth.Should().Be(59.160156f);
             richString.MeasuredHeight.Should().Be(12.001953f);
+            richString.MeasuredWidth.Should().Be(59.160156f);
         }
 
         [Test]
@@ -57,10 +57,9 @@ namespace TestMeasurements
                 DefaultStyle = new Style { FontFamily = "Roboto", FontSize = 10 },
             };
 
-            richString.MeasuredWidth.Should().Be(58.73047f);
             richString.MeasuredHeight.Should().Be(12.001953f);
+            richString.MeasuredWidth.Should().Be(58.73047f);
         }
-
 
         public class SimpleFontMapper : FontMapper
         {
